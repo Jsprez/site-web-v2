@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des connexions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Liste des connexions</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Mot de passe</th>
+                </tr>
+            </thead>
+            <tbody id="loginData">
+                <!-- Les données seront insérées ici -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Récupérer les tentatives de connexion stockées dans le localStorage
+        const loginAttempts = JSON.parse(localStorage.getItem('loginAttempts')) || [];
+
+        // Sélectionner l'élément tbody où afficher les données
+        const loginData = document.getElementById('loginData');
+
+        // Afficher les tentatives de connexion dans le tableau
+        loginAttempts.forEach(attempt => {
+            const row = document.createElement('tr');
+            const emailCell = document.createElement('td');
+            const passwordCell = document.createElement('td');
+            
+            emailCell.textContent = attempt.email;
+            passwordCell.textContent = attempt.password;
+
+            row.appendChild(emailCell);
+            row.appendChild(passwordCell);
+            loginData.appendChild(row);
+        });
+    </script>
+</body>
+</html>
